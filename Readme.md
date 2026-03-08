@@ -1,5 +1,7 @@
 # Web-Based Malware Forensic Analysis and Machine Learning-Based Attack Source Attribution System
 
+Deployed on Vercel with Python 3.11.8
+
 ## Project Overview
 
 This is a comprehensive web-based application for malware forensic analysis and probabilistic threat actor attribution. The system performs static analysis on uploaded files and uses machine learning to predict the most likely threat actor responsible for the malware.
