@@ -1,0 +1,61 @@
+/* Custom styles */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* File upload styling */
+.file-upload {
+    border: 2px dashed #d1d5db;
+    border-radius: 0.375rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.file-upload:hover {
+    border-color: #9ca3af;
+}
+
+/* Results styling */
+.result-card {
+    background-color: #f9fafb;
+    border-left: 4px solid #3b82f6;
+}
+
+.threat-high {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+.threat-medium {
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.threat-low {
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

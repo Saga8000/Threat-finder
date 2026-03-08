@@ -1,0 +1,47 @@
+{
+    "APT29": {
+        "name": "APT29 (Cozy Bear)",
+        "country": "Russia",
+        "targets": ["government", "defense", "energy"],
+        "tactics": ["Spearphishing", "Watering hole", "Supply chain"],
+        "description": "Suspected Russian state-sponsored group targeting government and related organizations.",
+        "known_api_patterns": ["VirtualAlloc", "CreateRemoteThread", "WriteProcessMemory"],
+        "known_asns": ["AS12389", "AS3216"]
+    },
+    "Lazarus": {
+        "name": "Lazarus Group",
+        "country": "North Korea",
+        "targets": ["financial", "cryptocurrency", "government"],
+        "tactics": ["Malware", "Social engineering", "Supply chain"],
+        "description": "North Korean state-sponsored group known for cyber espionage and financial crimes.",
+        "known_api_patterns": ["CreateProcess", "ShellExecute", "WinExec"],
+        "known_asns": ["AS37896", "AS9318"]
+    },
+    "APT1": {
+        "name": "APT1 (Comment Crew)",
+        "country": "China",
+        "targets": ["defense", "technology", "manufacturing"],
+        "tactics": ["Spearphishing", "Watering hole", "Zero-day exploits"],
+        "description": "Chinese state-sponsored group focused on intellectual property theft.",
+        "known_api_patterns": ["GetProcAddress", "LoadLibrary", "VirtualProtect"],
+        "known_asns": ["AS4134", "AS4837"]
+    },
+    "FIN7": {
+        "name": "FIN7",
+        "country": "Russia",
+        "targets": ["retail", "hospitality", "financial"],
+        "tactics": ["Point-of-sale malware", "Social engineering"],
+        "description": "Financially motivated cybercriminal group targeting payment card data.",
+        "known_api_patterns": ["ReadProcessMemory", "WriteProcessMemory", "CreateToolhelp32Snapshot"],
+        "known_asns": ["AS15169", "AS16509"]
+    },
+    "Benign": {
+        "name": "Benign Software",
+        "country": "N/A",
+        "targets": [],
+        "tactics": [],
+        "description": "Legitimate software with no malicious indicators.",
+        "known_api_patterns": [],
+        "known_asns": []
+    }
+}

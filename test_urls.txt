@@ -1,0 +1,95 @@
+# 🧪 MALWARE FORENSIC URL ANALYSIS - TEST SUITE
+# ====================================================
+#
+# ⚠️  IMPORTANT SAFETY WARNING:
+# =============================
+# These are FAKE URLs created specifically for testing your malware analysis system.
+# They demonstrate suspicious patterns but DO NOT actually exist or host malware.
+# DO NOT visit these URLs in a real browser - they are for analysis tool testing only!
+#
+# 🎯 How to use:
+# ==============
+# 1. Start your Flask application: python app.py
+# 2. Open browser to: http://127.0.0.1:5000
+# 3. Select "URL Analysis" option
+# 4. Copy and paste any URL from below
+# 5. Click "Analyze" to test your system
+#
+# 📊 Expected Results:
+# ====================
+# Your system should detect suspicious patterns and assign appropriate threat scores.
+# High-risk URLs should score 50+ with multiple suspicious indicators flagged.
+#
+# ====================================================
+
+# 🔴 CRITICAL RISK URLs (70-100 threat score)
+# ============================================
+http://192.168.1.100/malware.exe
+http://account-security-alert.ru@192.168.1.1/admin
+http://10.0.0.50/admin/login.php
+
+# 🟡 HIGH RISK URLs (50-69 threat score)
+# ======================================
+http://secure.login.account.verify.paypal.co.uk.admin-update.net/auth
+http://paypa1.com/secure/login
+http://g00gle-drive.com/shared/docs
+http://netfl1x-account.com/verify
+http://sub1.sub2.sub3.sub4.malicious-domain.ru/hack
+
+# 🟠 MEDIUM RISK URLs (30-49 threat score)
+# ========================================
+http://fake-bank-update.ga/verify
+http://free-prize-claim.ml/winner
+http://crypto-wallet-recovery.tk/reset
+http://microsoft-support-help.xyz/fix
+http://suspicious-bank-update.ru/login
+http://update-your-account-now.info/verify
+http://secure-banking-login.ru/auth
+
+# 🟢 LOW-MEDIUM RISK URLs (15-29 threat score)
+# ============================================
+https://bit.ly/3fake123
+https://tinyurl.com/fake-scam
+https://goo.gl/fake-link
+http://free-money-winner.xyz//claim//prize
+http://password-reset-secure.net/change
+http://invoice-payment-required.com/pay
+
+# 🎭 ADVANCED MALICIOUS PATTERNS
+# ===============================
+# Typosquatting Examples:
+http://paypaI.com/secure/login/verify
+http://g00gle-drive-shared-docs.ml/view
+http://micros0ft.com/support/help
+
+# Combined Attack Vectors:
+http://bank-of-america-secure-login.net//verify
+http://crypto-wallet-recovery-support.com//blockchain/verify
+http://microsoft@192.168.1.1/admin
+
+# ====================================================
+# 📈 TESTING CHECKLIST:
+# ====================
+# [ ] Test each risk category (Critical, High, Medium, Low)
+# [ ] Verify threat scores match expected ranges
+# [ ] Check that suspicious indicators are properly detected
+# [ ] Confirm ML predictions work (if model files present)
+# [ ] Test PDF report generation
+#
+# 🎯 Your system should successfully identify:
+# - IP addresses in domains
+# - Suspicious TLDs (.ga, .ml, .tk, .xyz, etc.)
+# - Long subdomain chains
+# - URL shorteners
+# - Brand impersonation/typosquatting
+# - @ symbols and other evasion techniques
+#
+# ====================================================
+# 🔒 SECURITY NOTE:
+# =================
+# This file contains only harmless test URLs for system validation.
+# Real malware analysis should never involve visiting suspicious sites.
+# Your analysis tool provides safe, static URL pattern analysis.
+#
+# Happy Testing! 🛡️🔍
+# ====================================================

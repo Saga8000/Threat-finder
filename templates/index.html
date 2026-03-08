@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Upload File - Malware Forensic Analysis{% endblock %}
+
+{% block content %}
+<div class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+            <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Malware Forensic Analysis</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Advanced Malware Analysis & Attribution
+            </p>
+            <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                Upload a suspicious file for static analysis and threat attribution using machine learning.
+            </p>
+        </div>
+
+        <div class="mt-10">
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl p-6">
+                <form id="analysis-form" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data" class="space-y-6">
+                    <!-- Analysis Type Selection -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Analysis Type</label>
+                        <div class="flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="analysis_type" value="file" checked class="form-radio h-4 w-4 text-indigo-600">
+                                <span class="ml-2">File Analysis</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="analysis_type" value="url" class="form-radio h-4 w-4 text-indigo-600">
+                                <span class="ml-2">URL Analysis</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Section -->
+                    <div id="file-section">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">File to analyze</label>
+                        <div class="file-upload flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="flex text-sm text-gray-600 justify-center">
+                                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                        <span>Upload a file</span>
+                                        <input id="file-upload" name="file" type="file" class="sr-only">
+                                    </label>
+                                    <p class="pl-1">or drag and drop</p>
+                                </div>
+                                <p class="text-xs text-gray-500">
+                                    PE, EXE, DLL, APK, DOCM, or other executable files up to 1GB
+                                </p>
+                                <p id="file-name" class="text-sm text-gray-900 mt-2"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- URL Input Section -->
+                    <div id="url-section" style="display: none;">
+                        <label for="url-input" class="block text-sm font-medium text-gray-700 mb-2">URL to analyze</label>
+                        <div class="mt-1">
+                            <input type="url" name="url" id="url-input" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md px-3 py-2 border" placeholder="https://example.com/malicious-link">
+                            <p class="mt-1 text-xs text-gray-500">Enter a suspicious URL for forensic analysis and threat attribution</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center">
+                        <button type="submit" id="analyze-btn" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <svg class="-ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span id="btn-text">Analyze File</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
