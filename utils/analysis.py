@@ -1,11 +1,15 @@
 import os
 import pefile
-import magic
 import hashlib
 import math
 import re
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+
+try:
+    import magic  # type: ignore
+except Exception:
+    magic = None
 
 def calculate_file_hash(file_path: str, hash_type: str = 'sha256') -> str:
     """Calculate file hash using the specified algorithm."""
@@ -127,13 +131,42 @@ def analyze_file(file_path: str) -> Dict[str, Any]:
     except OSError as e:
         raise OSError(f"Cannot get file size: {e}")
 
-    # Get file type with error handling
+    # Read file once (used for entropy + lightweight type detection fallbacks)
     try:
-        file_type = magic.from_file(file_path)
-    except Exception as e:
-        # Fallback if magic fails
-        file_type = "Unknown"
-        print(f"Warning: Could not determine file type: {e}")
+        with open(file_path, 'rb') as f:
+            file_data = f.read()
+    except IOError as e:
+        raise IOError(f"Cannot read file: {e}")
+
+    # Get file type with error handling
+    file_type = "Unknown"
+    if magic is not None:
+        try:
+            file_type = magic.from_file(file_path)
+        except Exception as e:
+            print(f"Warning: Could not determine file type via libmagic: {e}")
+
+    # Lightweight fallback if libmagic is unavailable/failed
+    if file_type == "Unknown":
+        try:
+            header = file_data[:4]
+            _, ext = os.path.splitext(file_path)
+            ext = ext.lower()
+
+            if file_data.startswith(b'MZ'):
+                # Most Windows PE files start with 'MZ'
+                file_type = "PE32 executable (Windows)"
+            elif header.startswith(b'PK\x03\x04'):
+                file_type = "ZIP archive"
+            elif ext in {'.dll', '.exe'}:
+                file_type = "PE32 executable (Windows)"
+            elif ext in {'.pdf'}:
+                file_type = "PDF document"
+            elif ext in {'.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'}:
+                file_type = "Office document"
+        except Exception:
+            # Keep Unknown
+            pass
 
     # Calculate hashes with error handling
     try:
@@ -149,12 +182,6 @@ def analyze_file(file_path: str) -> Dict[str, Any]:
         pe_info = extract_pe_info(file_path)
     
     # Calculate file entropy
-    try:
-        with open(file_path, 'rb') as f:
-            file_data = f.read()
-    except IOError as e:
-        raise IOError(f"Cannot read file: {e}")
-
     entropy = calculate_entropy(file_data)
 
     # Extract strings (basic implementation)

@@ -9,18 +9,23 @@ from utils.report_generator import generate_pdf_report
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['REPORT_FOLDER'] = 'reports'
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024  # 1GB max upload
 
-# Ensure upload and report directories exist
+_IS_VERCEL = bool(os.environ.get('VERCEL'))
+_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+_WRITABLE_DIR = '/tmp' if _IS_VERCEL else _BASE_DIR
+
+app.config['UPLOAD_FOLDER'] = os.path.join(_WRITABLE_DIR, 'uploads')
+app.config['REPORT_FOLDER'] = os.path.join(_WRITABLE_DIR, 'reports')
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max upload
+
+# Ensure upload and report directories exist (must be writable on Vercel)
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['REPORT_FOLDER'], exist_ok=True)
 
 # Load ML model and encoders
 try:
-    model = joblib.load('ml_model/model.pkl')
-    label_encoders = joblib.load('ml_model/label_encoders.pkl')
+    model = joblib.load(os.path.join(_BASE_DIR, 'ml_model', 'model.pkl'))
+    label_encoders = joblib.load(os.path.join(_BASE_DIR, 'ml_model', 'label_encoders.pkl'))
     print("ML model and encoders loaded successfully")
 except Exception as e:
     print(f"Error loading ML model: {e}")
@@ -29,7 +34,7 @@ except Exception as e:
 
 # Load threat actor knowledge base
 try:
-    with open('data/threat_actors.json', 'r') as f:
+    with open(os.path.join(_BASE_DIR, 'data', 'threat_actors.json'), 'r') as f:
         threat_actors_kb = json.load(f)
     print("Threat actors knowledge base loaded successfully")
 except Exception as e:
